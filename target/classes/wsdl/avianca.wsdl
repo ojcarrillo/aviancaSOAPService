@@ -1,0 +1,191 @@
+<wsdl:definitions
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.avianca.org/demo/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="aviancaService"
+	targetNamespace="http://www.avianca.org/demo/">
+	<wsdl:types>
+		<xsd:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="http://www.avianca.org/demo/"
+			elementFormDefault="unqualified" version="1.0">
+			<xsd:element name="cancelarReserva">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" name="idReserva"
+							type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="cancelarReservaResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" name="codigo"
+							type="xsd:string" />
+						<xsd:element minOccurs="0" name="mensaje"
+							type="xsd:string" />
+						<xsd:element minOccurs="0" name="estado"
+							type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="obtenerReserva">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" name="idReserva"
+							type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="obtenerReservaResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="idReserva" type="xsd:string"
+							minOccurs="0" />
+						<xsd:element name="pasajeros" type="tns:persona"
+							nillable="true" minOccurs="0" maxOccurs="unbounded" />
+						<xsd:element name="vuelo" type="tns:vuelo"
+							minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+				<xsd:complexType name="persona">
+					<xsd:sequence>
+						<xsd:element name="apellido" type="xsd:string"
+							minOccurs="0" />
+						<xsd:element name="correoElectronico"
+							type="xsd:string" minOccurs="0" />
+						<xsd:element name="genero" type="xsd:string"
+							minOccurs="0" />
+						<xsd:element name="nombre" type="xsd:string"
+							minOccurs="0" />
+						<xsd:element name="numDoc" type="xsd:string"
+							minOccurs="0" />
+						<xsd:element name="tipoDoc" type="xsd:string"
+							minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+
+			<xsd:element name="realizarReserva">
+				<xsd:complexType>
+					<xsd:sequence>
+							<xsd:element name="idReserva" type="xsd:string"
+								minOccurs="0" />
+							<xsd:element name="pasajeros" type="tns:persona"
+								nillable="true" minOccurs="0" maxOccurs="unbounded" />
+							<xsd:element name="vuelo" type="tns:vuelo"
+								minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+				<xsd:complexType name="vuelo">
+					<xsd:sequence>
+						<xsd:element name="destino" type="xsd:string"
+							minOccurs="0" />
+						<xsd:element name="fechaFin" type="xsd:string"
+							minOccurs="0" />
+						<xsd:element name="fechaInicio" type="xsd:string"
+							minOccurs="0" />
+						<xsd:element name="grupo" type="xsd:string"
+							minOccurs="0" />
+						<xsd:element name="nroVuelo" type="xsd:string"
+							minOccurs="0" />
+						<xsd:element name="origen" type="xsd:string"
+							minOccurs="0" />
+						<xsd:element name="puertaEmbarque" type="xsd:string"
+							minOccurs="0" />
+						<xsd:element name="silla" type="xsd:string"
+							minOccurs="0" />
+					</xsd:sequence>
+				</xsd:complexType>
+			<xsd:element name="realizarReservaResponse">
+
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" name="codigo"
+							type="xsd:string" />
+						<xsd:element minOccurs="0" name="mensaje"
+							type="xsd:string" />
+						<xsd:element minOccurs="0" name="estado"
+							type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="cancelarReservaRequest">
+		<wsdl:part element="tns:cancelarReserva" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="cancelarReservaResponse">
+		<wsdl:part element="tns:cancelarReservaResponse"
+			name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="obtenerReservaRequest">
+		<wsdl:part name="parameters" element="tns:obtenerReserva" />
+	</wsdl:message>
+	<wsdl:message name="obtenerReservaResponse">
+		<wsdl:part name="parameters"
+			element="tns:obtenerReservaResponse" />
+	</wsdl:message>
+	<wsdl:message name="realizarReservaRequest">
+		<wsdl:part name="parameters" element="tns:realizarReserva"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="realizarReservaResponse">
+		<wsdl:part name="parameters"
+			element="tns:realizarReservaResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="AviancaSystemServices">
+		<wsdl:operation name="cancelarReserva">
+			<wsdl:input message="tns:cancelarReservaRequest" />
+			<wsdl:output message="tns:cancelarReservaResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="obtenerReserva">
+			<wsdl:input message="tns:obtenerReservaRequest" />
+			<wsdl:output message="tns:obtenerReservaResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="realizarReserva">
+			<wsdl:input message="tns:realizarReservaRequest"></wsdl:input>
+			<wsdl:output message="tns:realizarReservaResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="AviancaServicesEndpoint"
+		type="tns:AviancaSystemServices">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="cancelarReserva">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="cancelarReservaRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="cancelarReservaResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="obtenerReserva">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="obtenerReservaRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="obtenerReservaResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="realizarReserva">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="realizarReservaRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="realizarReservaResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="AviancaService">
+		<wsdl:port binding="tns:AviancaServicesEndpoint"
+			name="AviancaServicesEndpoint">
+			<soap:address
+				location="http://localhost:8181/cxf/services/AviancaService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
